@@ -69,14 +69,10 @@ export default {
             const [, payload] = line.split("\r\n");
 
             if (payload) {
-                console.log(payload.split("\n"));
-
                 payload.split("\n").forEach((load) => {
                     if (info.isError) return info.output.push(load.slice("data: ".length));
 
                     const [header, data] = load.slice("data: ".length).split(":");
-
-                    console.log(JSON.stringify(header), JSON.stringify(data));
 
                     if (!data) {
                         if (info.isOutput) info.output.push(header);
