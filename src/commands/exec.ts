@@ -14,6 +14,10 @@ const langs = [
     },
 ];
 
+const regex = {
+    codeblock: /```\w+(.+)```/s,
+} as const;
+
 export default {
     name: "exec",
     aliases: [],
@@ -29,7 +33,7 @@ export default {
 
         if (!langs.find(({ aliases }) => aliases.includes(lang))) return message.channel.send(`Unsupported language.`);
 
-        const code = text.match(/```\w+(.+)```/s)?.[1].trim();
+        const code = text.match(regex.codeblock)?.[1].trim();
 
         if (!code) return message.channel.send(`No code was provided.`);
 
@@ -66,13 +70,16 @@ export default {
         const raw = output.split("\n\n\r").map((l) => l.trim());
 
         raw.forEach((line) => {
-            const [, payload] = line.split("\r\n");
+            const payload = line.split("\r\n").slice(1).join("\r\n");
 
             if (payload) {
                 payload.split("\n").forEach((load) => {
                     if (info.isError) return info.output.push(load.slice("data: ".length));
 
-                    const [header, data] = load.slice("data: ".length).split(":");
+                    const stuff = load.slice("data: ".length).split(":");
+
+                    const header = stuff[0];
+                    const data = stuff.slice(1).join(":");
 
                     if (!data) {
                         if (info.isOutput) info.output.push(header);
