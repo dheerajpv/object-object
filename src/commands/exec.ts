@@ -16,6 +16,12 @@ const langs = [
 
 export default {
     name: "exec",
+    aliases: [],
+    category: "utility",
+    cooldown: 5,
+    description: "Executes some code in a codeblock.",
+    details: "Currently only supports JavaScript and TypeScript.",
+    usage: "<code>",
     async callback({ message, args, client, text }) {
         const lang = args[0].slice(3).trim();
 
