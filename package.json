@@ -1,0 +1,19 @@
+{
+    "name": "object-object",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "repository": "https://github.com/dheerajpv/object-object.git",
+    "author": "Dheeraj Prakash <dheerajpv16@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "start": "yarn build && node dist/index.js",
+        "dev": "nodemon src/index.ts"
+    },
+    "dependencies": {
+        "@aeroware/aeroclient": "^3.6.2"
+    },
+    "devDependencies": {
+        "@types/ws": "^7.4.2"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "COOLDOWN_RESPONSE": "This command has $COOLDOWN cooldown. You can run it again in $TIME",
+    "ERROR_RESPONSE": "😱 an ERROR!",
+    "USAGE_RESPONSE": "Command $COMMAND is used like this: `$COMMAND $USAGE`",
+    "NSFW_RESPONSE": "how are you seeing this message",
+    "GUILD_RESPONSE": "This command can only be run in a server.",
+    "GUARDED_RESPONSE": "This command is guarded and cannot be disabled.",
+    "DISABLED_RESPONSE": "This command is disabled in this server.",
+    "DM_RESPONSE": "This command can only be run in DMs.",
+    "STAFF_RESPONSE": "This command can only be run by bot staff",
+    "PERMS_REPSONSE": "This command needs you to have `$PERMS` permissions."
+}
