@@ -2,7 +2,7 @@ import { AeroClientOptions } from "@aeroware/aeroclient/dist/types";
 
 export default {
     token: process.env.TOKEN,
-    prefix: "$",
+    prefix: "[]",
     logging: true,
     loggerHeader: "object",
     commandsPath: "./commands",
