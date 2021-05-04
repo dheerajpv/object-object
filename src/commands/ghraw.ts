@@ -8,7 +8,7 @@ export default {
     cooldown: 2,
     description: "Generates the raw github user content link for a file on github.",
     usage: "<url>",
-    async callback({ message, args, client, text }) {
+    async callback({ message, args, client }) {
         if (!args[0]) return message.channel.send(`Please provide the file URL.`);
 
         const url = new URL(args[0]);
