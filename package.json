@@ -12,9 +12,11 @@
     },
     "dependencies": {
         "@aeroware/aeroclient": "^3.6.2",
+        "common-tags": "^1.8.0",
         "node-fetch": "^2.6.1"
     },
     "devDependencies": {
+        "@types/common-tags": "^1.8.0",
         "@types/node": "^15.0.1",
         "@types/node-fetch": "^2.5.10",
         "@types/ws": "^7.4.2",
