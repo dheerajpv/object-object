@@ -1,11 +1,8 @@
 import { utils } from "@aeroware/aeroclient";
 import { Command } from "@aeroware/aeroclient/dist/types";
 import { MessageEmbed } from "discord.js";
+import { getCode, getLang } from "../util/codeblock";
 import exec from "../util/exec";
-
-const regex = {
-    codeblock: /```\w+(.+)```/s,
-} as const;
 
 export default {
     name: "exec",
@@ -15,13 +12,11 @@ export default {
     description: "Executes some code in a codeblock.",
     details: "Currently only supports JavaScript and TypeScript.",
     usage: "<code>",
-    async callback({ message, args, text }) {
-        const lang = args[0].slice(3).trim();
-
+    async callback({ message, text }) {
+        const lang = getLang(text);
         if (!lang) return message.channel.send("No language was provided");
 
-        const code = text.match(regex.codeblock)?.[1].trim();
-
+        const code = getCode(text);
         if (!code) return message.channel.send("No code was provided.");
 
         const toEdit = await message.channel.send(
