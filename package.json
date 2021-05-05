@@ -12,9 +12,11 @@
     },
     "dependencies": {
         "@aeroware/aeroclient": "^3.6.2",
+        "@types/prettier": "^2.2.3",
         "common-tags": "^1.8.0",
         "html-entities": "^2.3.2",
-        "node-fetch": "^2.6.1"
+        "node-fetch": "^2.6.1",
+        "prettier": "^2.2.1"
     },
     "devDependencies": {
         "@types/common-tags": "^1.8.0",
