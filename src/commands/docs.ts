@@ -7,9 +7,9 @@ import fetch from "node-fetch";
 export default {
     name: "docs",
     aliases: ["d"],
-    category: "utility",
-    description: "Fetches documentation from discord or MDN.",
-    details: "use 'djs' or 'mdn' as the first argument",
+    category: "information",
+    description: "Fetches documentation from discord.js or MDN.",
+    details: "Supported platforms are 'djs' and 'mdn'.",
     usage: "<djs/mdn> <query>",
     minArgs: 2,
     async callback({ message, args }) {
@@ -17,45 +17,27 @@ export default {
         const query = search.join(" ");
 
         if (platform !== "djs" && platform !== "mdn") {
-            message.channel.send(
-                "Invalid platform. Allowed platforms are 'djs' and 'mdn'."
-            );
-            return;
+            return message.channel.send("Invalid platform. Allowed platforms are 'djs' and 'mdn'.");
         }
 
         if (!query) {
-            message.channel.send("No query given.");
-            return;
+            return message.channel.send("No query given.");
         }
 
         if (platform === "djs") {
             try {
-                const res = await fetch(
-                    `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(
-                        query
-                    )}`
-                );
+                const res = await fetch(`https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`);
                 const embed = await res.json();
 
-                message.channel.send(
-                    embed ? { embed } : "Cannot find any matches."
-                );
-                return;
+                return message.channel.send(embed ? { embed } : "Could find any results.");
             } catch {
-                message.channel.send(
-                    "There was a network error querying your request."
-                );
-                return;
+                return message.channel.send("There was a network error in your request.");
             }
         } else {
-            const res = await fetch(
-                `https://developer.mozilla.org/api/v1/search/en-US?q=${encodeURIComponent(
-                    query
-                )}`
-            );
+            const res = await fetch(`https://developer.mozilla.org/api/v1/search/en-US?q=${encodeURIComponent(query)}`);
             const json = await res.json();
 
-            message.channel.send(
+            return message.channel.send(
                 new MessageEmbed()
                     .setColor("RANDOM")
                     .setDescription(
@@ -65,16 +47,8 @@ export default {
                                     .slice(0, 3)
                                     .map(
                                         (doc: any) =>
-                                            `**[${doc.title}](https://developer.mozilla.org/${doc.mdn_url})**\n`.replace(
-                                                /_/g,
-                                                "\\_"
-                                            ) +
-                                            `\`\`\`js\n${doc.highlight.body
-                                                .join(" ")
-                                                .replace(
-                                                    /<\/?mark>/g,
-                                                    ""
-                                                )}\`\`\``
+                                            `**[${doc.title}](https://developer.mozilla.org/${doc.mdn_url})**\n`.replace(/_/g, "\\_") +
+                                            `\`\`\`js\n${doc.highlight.body.join(" ").replace(/<\/?mark>/g, "")}\`\`\``
                                     )
                                     .join("\n\n"),
                                 2048
@@ -85,9 +59,7 @@ export default {
                     .setAuthor(
                         "Mozilla Developer Network [Full Results]",
                         "https://developer.mozilla.org/static/img/opengraph-logo.72382e605ce3.png",
-                        `https://developer.mozilla.org/en-US/search?q=${encodeURIComponent(
-                            query
-                        )}`
+                        `https://developer.mozilla.org/en-US/search?q=${encodeURIComponent(query)}`
                     )
             );
         }

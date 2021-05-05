@@ -6,10 +6,7 @@ export default {
     category: "dev",
     async callback({ message, client }) {
         const msg = await message.channel.send("Calculating ping");
-        await msg.edit(
-            `** Bot Ping:** ${
-                msg.createdTimestamp - message.createdTimestamp
-            }ms, **Discord API Ping:** ${client.ws.ping}ms`
-        );
+
+        await msg.edit(`** Bot Ping:** ${msg.createdTimestamp - message.createdTimestamp}ms, **Discord API Ping:** ${client.ws.ping}ms`);
     },
 } as Command;
