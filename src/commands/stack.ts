@@ -24,7 +24,7 @@ export default {
 
         if (!query) return message.channel.send(`Please provide a query.`);
 
-        if (cache.get(query) && cache.get(query)!.timestamp + 1000 * 60 * 60 * 24 < Date.now()) return message.channel.send(cache.get(query)!.embed);
+        if (cache.get(query) && cache.get(query)!.timestamp + 1000 * 60 * 60 * 24 > Date.now()) return message.channel.send(cache.get(query)!.embed);
 
         const json = await (await fetch(`https://api.stackexchange.com/2.2/search?order=desc&sort=activity&site=stackoverflow&intitle=${encodeURIComponent(query)}`)).json();
 
