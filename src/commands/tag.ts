@@ -23,12 +23,10 @@ export default {
     minArgs: 1,
     guildOnly: true,
     async callback({ message, args, text }) {
-        console.log(args);
-
         const guildTags = (await tags.findById(message.guild!.id)) ?? (await tags.create({ _id: message.guild!.id }));
 
         if (["create", "update", "delete", "edit", "del", "make", "claim", "info", "raw"].includes(args[0].toLowerCase())) {
-            return manageTag(message, guildTags, args[1], args[0] as TagAction, text.split(" ").slice(3).join(" "));
+            return manageTag(message, guildTags, args[1], args[0] as TagAction, text.split(/\s+/).slice(3).join(" "));
         } else if (["list", "all"].includes(args[0].toLowerCase())) {
             if (!guildTags.tags.length)
                 return message.channel.send(
