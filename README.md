@@ -52,4 +52,4 @@ Invite the bot [here](https://discord.com/oauth2/authorize?client_id=83915123586
 | stack     | Fetches Stack Overflow questions.                                |
 | tag       | Manage or retrieve tags to display tidbits of info quickly       |
 
-###### <sup>An entry for the <a href="https://discord.gg/8KbMUMqPuR">Worn Off Keys</a> programming competition of May 2021.</sup>
+###### <sup align="center">An entry for the <a href="https://discord.gg/8KbMUMqPuR">Worn Off Keys</a> programming competition of May 2021.</sup>
