@@ -40,6 +40,8 @@ export default {
 
         const $ = cheerio.load(html);
 
+        await browser.close();
+
         const embed = new MessageEmbed()
             .setColor("RANDOM")
             .setTitle("Google [Full results]")
