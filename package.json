@@ -16,6 +16,7 @@
         "cheerio": "^1.0.0-rc.6",
         "common-tags": "^1.8.0",
         "html-entities": "^2.3.2",
+        "lodash": "^4.17.21",
         "mongoose": "^5.12.7",
         "node-fetch": "^2.6.1",
         "node-jq": "^1.12.0",
