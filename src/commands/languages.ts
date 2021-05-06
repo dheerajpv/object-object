@@ -1,6 +1,7 @@
+import { utils } from "@aeroware/aeroclient";
 import { Command } from "@aeroware/aeroclient/dist/types";
 import { stripIndent } from "common-tags";
-import { MessageEmbed, MessageReaction, User } from "discord.js";
+import { MessageEmbed, EmojiIdentifierResolvable } from "discord.js";
 
 const langs = {
     js: {
@@ -88,7 +89,10 @@ export default {
             .addFields(
                 ...Object.keys(langs).map((k: string) => {
                     return {
-                        name: langs[k as keyof typeof langs].name,
+                        name:
+                            langs[k as keyof typeof langs].emoji +
+                            " " +
+                            langs[k as keyof typeof langs].name,
                         value: langs[k as keyof typeof langs].main,
                     };
                 })
@@ -103,18 +107,24 @@ export default {
         let sentEmbed = await message.channel.send(mainEmbed);
         emojis.forEach((e) => sentEmbed.react(e));
 
-        let filter = (reaction: MessageReaction, user: User) =>
-            emojis.includes(reaction.emoji.id!) &&
-            !user.bot &&
-            user.id === message.author.id;
+        // FIXME: DOES NOT WORK. NEEDS A FIX @cursorsdottsx
+        const reaction = (
+            await sentEmbed.awaitReactions(
+                (r, u) =>
+                    emojis.map((e) => e.split(":")[2]).includes(r.emoji.name) &&
+                    u.id === message.author.id,
+                {
+                    time: 60000,
+                    max: 1,
+                }
+            )
+        ).first();
 
-        let reaction = await sentEmbed.awaitReactions(filter, {
-            max: 1,
-            time: 60000,
-            errors: ["time"],
-        });
+        console.log(reaction);
 
-        let emoteName = reaction.first()?.emoji.name! as keyof typeof langs;
+        if (!reaction) return;
+
+        let emoteName = reaction.emoji.name! as keyof typeof langs;
         let langEmbed = new MessageEmbed()
             .setTitle(`Additional ${emoteName} help!`)
             .addField("Additional info", stripIndent`${langs[emoteName].extra}`)
