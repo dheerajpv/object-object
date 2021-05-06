@@ -7,5 +7,6 @@
 
 ![banner image](assets/banner.png)
 
-a bot to help teach people basic programming skills.
-Made for the Worn Off Keys programming contest May 2021
+### <span align="center">[object Object] - A utility bot for programmers
+
+###### <sup>An entry for the <a href="https://discord.gg/8KbMUMqPuR">Worn Off Keys</a> programming competition of May 2021.</sup>
