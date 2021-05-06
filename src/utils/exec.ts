@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 const langs = [
     {
         aliases: ["js", "javascript"],
-        compiler: "nodejs-14.0.0",
+        compiler: "nodejs-head",
     },
     {
         aliases: ["ts", "typescript"],
@@ -28,6 +28,18 @@ const langs = [
     {
         aliases: ["hs", "haskell"],
         compiler: "ghc-head",
+    },
+    {
+        aliases: ["coffee"],
+        compiler: "coffeescript-head",
+    },
+    {
+        aliases: ["ruby"],
+        compiler: "ruby-head",
+    },
+    {
+        aliases: ["lua"],
+        compiler: "lua-5.4.0",
     },
 ];
 
