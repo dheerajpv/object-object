@@ -31,9 +31,12 @@ Nearly all commands are utilities to speed up your development process or to hel
 
 -   Want to Google something but too lazy to open a new tab? We've got a command for that.
 
--   Want to search questions on Stack Overflow? We've got a command for that.
+-   Want to search questions on Stack Overflow? _We've got a command for that._
 
--   Want to stalk people on GitHub by looking at their repositoryies? **We've got a command for that.**
+-   Want to stalk people on GitHub by looking at their repositories? **We've got a command for that.**
+
+-   Want to search for NPM packages quickly?
+    **_We've got a command for that._** ~~you should probably use `npm search` instead~~
 
 Invite the bot [here](https://discord.com/oauth2/authorize?client_id=839151235860004894&scope=bot&permissions=8) to try it out, and see if it makes your life a little easier!
 
