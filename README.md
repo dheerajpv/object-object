@@ -1,6 +1,7 @@
 # object-object
 
-![Discord](https://img.shields.io/discord/839156004712349736?color=%235C6FB1&logo=discord&logoColor=%23fff&style=for-the-badge)
+![Discord](https://img.shields.io/discord/839156004712349736?color=%235C6FB1&logo=discord&logoColor=white&style=for-the-badge)
+[![Invite](https://img.shields.io/badge/invite-the%20bot-5C6FB1?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/api/oauth2/authorize?client_id=839151235860004894&permissions=8&scope=bot%20applications.commands)
 ![GitHub](https://img.shields.io/github/license/dheerajpv/object-object?style=for-the-badge)
 [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 ![TypeScript](https://img.shields.io/badge/built%20with-typescript-blue?style=for-the-badge)
