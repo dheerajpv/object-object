@@ -1,13 +1,21 @@
-# object-object
-
-![Discord](https://img.shields.io/discord/839156004712349736?color=%235C6FB1&logo=discord&logoColor=%23fff&style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/dheerajpv/object-object?style=for-the-badge)
-[![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
-![TypeScript](https://img.shields.io/badge/built%20with-typescript-blue?style=for-the-badge)
-
 ![banner image](assets/banner.png)
 
-### <span align="center">[object Object] - A utility bot for programmers
+### <p align="center">[object Object] - A utility bot for programmers</p>
+
+<div align="center">
+    <a href="https://discord.gg/ZU6PZdYcps">
+      <img src="https://img.shields.io/discord/839156004712349736?color=%235C6FB1&logo=discord&logoColor=%23fff&style=for-the-badge" alt="Discord" />
+    </a>
+    <a href="https://github.com/dheerajpv/object-object">
+        <img src="https://img.shields.io/github/license/dheerajpv/object-object?style=for-the-badge" alt="GitHub" />
+    </a>
+    <a href="https://www.typescriptlang.org/">
+      <img src="https://img.shields.io/badge/built%20with-typescript-blue?style=for-the-badge" alt="TypeScript" />
+    </a>
+    <a href="https://github.com/prettier/prettier/">
+      <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge" alt="Prettier" />
+    </a>
+</div>
 
 ---
 
