@@ -6,7 +6,6 @@ import exec from "../utils/exec";
 
 export default {
     name: "exec",
-    aliases: [],
     category: "utility",
     cooldown: 5,
     description: "Executes some code in a codeblock.",
@@ -22,7 +21,13 @@ export default {
         if (!code) return message.channel.send("No code was provided.");
 
         const toEdit = await message.channel.send(
-            new MessageEmbed().setTitle("Code input").setAuthor(message.author.tag, message.author.displayAvatarURL()).setDescription(`\`\`\`${lang}\n${code}\n\`\`\``)
+            new MessageEmbed()
+                .setTitle("Code input")
+                .setAuthor(
+                    message.author.tag,
+                    message.author.displayAvatarURL()
+                )
+                .setDescription(`\`\`\`${lang}\n${code}\n\`\`\``)
         );
 
         try {
@@ -31,8 +36,16 @@ export default {
             return toEdit.edit(
                 new MessageEmbed()
                     .setTitle("Code output")
-                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setDescription(`\`\`\`\n${utils.trim(info.output.join("\n"), 2000)}\n\`\`\``)
+                    .setAuthor(
+                        message.author.tag,
+                        message.author.displayAvatarURL()
+                    )
+                    .setDescription(
+                        `\`\`\`\n${utils.trim(
+                            info.output.join("\n"),
+                            2000
+                        )}\n\`\`\``
+                    )
                     .setFooter(`Program exited with code ${info.code}.`)
             );
         } catch (e) {

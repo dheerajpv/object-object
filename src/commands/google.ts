@@ -13,7 +13,6 @@ const cache = new Map<
 
 export default {
     name: "google",
-    aliases: [],
     category: "information",
     cooldown: 2,
     description: "Searches google.",
@@ -23,13 +22,19 @@ export default {
 
         if (!query) return message.channel.send(`Please provide a query.`);
 
-        if (cache.get(query) && cache.get(query)!.timestamp + 1000 * 60 * 60 * 24 > Date.now()) return message.channel.send(cache.get(query)!.embed);
+        if (
+            cache.get(query) &&
+            cache.get(query)!.timestamp + 1000 * 60 * 60 * 24 > Date.now()
+        )
+            return message.channel.send(cache.get(query)!.embed);
 
         const browser = await puppeteer.launch();
 
         const page = await browser.newPage();
 
-        await page.goto(`https://www.google.com/search?q=${encodeURIComponent(query)}`);
+        await page.goto(
+            `https://www.google.com/search?q=${encodeURIComponent(query)}`
+        );
 
         const html = await page.content();
 
@@ -49,7 +54,8 @@ export default {
                                     .contents()
                                     .toArray()
                                     //@ts-ignore
-                                    .find((el) => el.type === "text")?.data ?? "No title found."
+                                    .find((el) => el.type === "text")?.data ??
+                                "No title found."
                             }](${a.attribs.href})`
                     )
                     .join("\n\n")
