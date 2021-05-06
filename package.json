@@ -13,7 +13,6 @@
     "dependencies": {
         "@aeroware/aeroclient": "^3.6.2",
         "@octokit/core": "^3.4.0",
-        "@types/prettier": "^2.2.3",
         "cheerio": "^1.0.0-rc.6",
         "common-tags": "^1.8.0",
         "html-entities": "^2.3.2",
@@ -30,6 +29,7 @@
         "@types/mongoose": "^5.10.5",
         "@types/node": "^15.0.1",
         "@types/node-fetch": "^2.5.10",
+        "@types/prettier": "^2.2.3",
         "@types/ws": "^7.4.2",
         "nodemon": "^2.0.7",
         "ts-node": "^9.1.1",
