@@ -13,6 +13,6 @@ export default {
     persistentCooldowns: true,
     staff: process.env.STAFF?.replace(/\s+/g, "").split(","),
     testServers: process.env.TEST_SERVERS?.replace(/\s+/g, "").split(","),
-    logChannel: "", // todo: add something
+    logChannel: "839873919993643008",
     disableStaffCooldowns: true,
 } as AeroClientOptions;
