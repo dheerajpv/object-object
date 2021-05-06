@@ -1,6 +1,17 @@
-import { Schema, model, models, Document, Model } from "mongoose";
+import { Document, model, Model, models, Schema } from "mongoose";
 
-const Tags = new Schema({
+export interface ITags extends Document {
+    _id: string;
+    tags: {
+        owner: string;
+        content: string;
+        name: string;
+        uses: number;
+        createdAt: number;
+    }[];
+}
+
+const tag = new Schema({
     _id: String,
     tags: {
         type: [
@@ -17,21 +28,20 @@ const Tags = new Schema({
                     type: String,
                     required: true,
                 },
+                uses: {
+                    type: Number,
+                    default: 0,
+                },
+                createdAt: {
+                    type: Number,
+                    requried: true,
+                },
             },
         ],
         default: [],
     },
 });
 
-export interface ITags extends Document {
-    _id: string;
-    tags: {
-        owner: string;
-        content: string;
-        name: string;
-    }[];
-}
-
-const tags = (models["tags"] as Model<ITags>) || model<ITags>("tags", Tags);
+const tags = (models["tags"] as Model<ITags>) || model<ITags>("tags", tag);
 
 export default tags;
