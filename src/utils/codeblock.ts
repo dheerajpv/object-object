@@ -1,4 +1,4 @@
-const cbRegex = /```(\w+)(.+)```/s;
+const cbRegex = /```(\w*)(.+)```/ms;
 
 /**
  * Searches a string for a codeblock and returns the language provided.

@@ -4,6 +4,7 @@ import cheerio from "cheerio";
 import { decode } from "html-entities";
 import mongoose from "mongoose";
 import fetch from "node-fetch";
+import fs from "fs/promises";
 
 export const lookup = {
     html: [] as { tag: string; href: string; text: string }[],
@@ -101,6 +102,12 @@ export default {
                     }));
 
                 this.logger.success(`Loaded CSS lookup!`);
+            }
+
+            try {
+                await fs.stat("./tmp");
+            } catch {
+                await fs.mkdir("./tmp");
             }
         } catch (e) {
             console.error(e);
