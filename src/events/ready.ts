@@ -25,12 +25,12 @@ export default {
                 },
                 (err) => {
                     if (err) return this.logger.error(err.stack || err.message);
-                    this.logger.success("Connected to mongo.");
+                    this.logger.success("Connected to mongo!");
                 }
             );
 
             mongoose.connection.on("connect", () => {
-                this.logger.success("Mongoose is connected.");
+                this.logger.success("Mongoose is connected!");
             });
 
             mongoose.connection.on("error", (err) => {

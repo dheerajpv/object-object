@@ -4,7 +4,7 @@ import { MessageEmbed } from "discord.js";
 import Fuse from "fuse.js";
 import { decode } from "html-entities";
 import fetch from "node-fetch";
-import { lookup } from "../events/ready";
+import { lookup } from "../../events/ready";
 
 export default {
     name: "docs",

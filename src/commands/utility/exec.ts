@@ -2,8 +2,8 @@ import { utils } from "@aeroware/aeroclient";
 import { Command } from "@aeroware/aeroclient/dist/types";
 import { stripIndent } from "common-tags";
 import { MessageEmbed } from "discord.js";
-import { getCode, getLang } from "../utils/codeblock";
-import exec from "../utils/exec";
+import { getCode, getLang } from "../../utils/codeblock";
+import exec from "../../utils/exec";
 
 export default {
     name: "exec",
