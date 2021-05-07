@@ -1,8 +1,7 @@
+import { utils } from "@aeroware/aeroclient";
 import { Command } from "@aeroware/aeroclient/dist/types";
 import { MessageEmbed } from "discord.js";
 import fetch from "node-fetch";
-import { utils } from "@aeroware/aeroclient";
-import { oneLine } from "common-tags";
 
 export default {
     name: "npm",

@@ -112,8 +112,6 @@ export default {
             );
             const json = await res.json();
 
-            console.log(json.documents[0].highlight);
-
             return message.channel.send(
                 new MessageEmbed()
                     .setColor("RANDOM")

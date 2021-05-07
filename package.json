@@ -17,12 +17,14 @@
         "common-tags": "^1.8.0",
         "fuse.js": "^6.4.6",
         "html-entities": "^2.3.2",
+        "javascript-obfuscator": "^2.12.0",
         "lodash": "^4.17.21",
         "mongoose": "^5.12.7",
         "node-fetch": "^2.6.1",
         "node-jq": "^1.12.0",
         "prettier": "^2.2.1",
-        "puppeteer": "^9.1.1"
+        "puppeteer": "^9.1.1",
+        "sourcebin-api": "^1.0.6"
     },
     "devDependencies": {
         "@types/common-tags": "^1.8.0",
