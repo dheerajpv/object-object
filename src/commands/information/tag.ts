@@ -3,9 +3,18 @@ import { Command } from "@aeroware/aeroclient/dist/types";
 import { stripIndent } from "common-tags";
 import { Message, MessageEmbed, Util } from "discord.js";
 import { chunk } from "lodash";
-import tags, { ITags } from "../models/tags";
+import tags, { ITags } from "../../models/tags";
 
-type TagAction = "create" | "update" | "delete" | "make" | "edit" | "del" | "claim" | "info" | "raw";
+type TagAction =
+    | "create"
+    | "update"
+    | "delete"
+    | "make"
+    | "edit"
+    | "del"
+    | "claim"
+    | "info"
+    | "raw";
 
 const aliases = {
     make: "create",
@@ -23,10 +32,30 @@ export default {
     minArgs: 1,
     guildOnly: true,
     async callback({ message, args, text }) {
-        const guildTags = (await tags.findById(message.guild!.id)) ?? (await tags.create({ _id: message.guild!.id }));
+        const guildTags =
+            (await tags.findById(message.guild!.id)) ??
+            (await tags.create({ _id: message.guild!.id }));
 
-        if (["create", "update", "delete", "edit", "del", "make", "claim", "info", "raw"].includes(args[0].toLowerCase())) {
-            return manageTag(message, guildTags, args[1], args[0] as TagAction, text.split(/\s+/).slice(3).join(" "));
+        if (
+            [
+                "create",
+                "update",
+                "delete",
+                "edit",
+                "del",
+                "make",
+                "claim",
+                "info",
+                "raw",
+            ].includes(args[0].toLowerCase())
+        ) {
+            return manageTag(
+                message,
+                guildTags,
+                args[1],
+                args[0] as TagAction,
+                text.split(/\s+/).slice(3).join(" ")
+            );
         } else if (["list", "all"].includes(args[0].toLowerCase())) {
             if (!guildTags.tags.length)
                 return message.channel.send(
@@ -37,7 +66,15 @@ export default {
                 );
 
             const pages = chunk(guildTags.tags, 10).map((chunk, i, arr) =>
-                new MessageEmbed().setDescription(chunk.map((tag, j) => `${i * 10 + j + 1}. \`${tag.name}\``).join("\n")).setFooter(`page ${i + 1} out of ${arr.length}`)
+                new MessageEmbed()
+                    .setDescription(
+                        chunk
+                            .map(
+                                (tag, j) => `${i * 10 + j + 1}. \`${tag.name}\``
+                            )
+                            .join("\n")
+                    )
+                    .setFooter(`page ${i + 1} out of ${arr.length}`)
             );
 
             return utils.paginate(message, pages, {
@@ -64,14 +101,37 @@ export default {
     },
 } as Command;
 
-async function manageTag(message: Message, guildTags: ITags, tag: string, action: TagAction, payload?: string) {
-    if (!["delete", "claim", "del", "info", "raw"].includes(action) && !payload) {
+async function manageTag(
+    message: Message,
+    guildTags: ITags,
+    tag: string,
+    action: TagAction,
+    payload?: string
+) {
+    if (
+        !["delete", "claim", "del", "info", "raw"].includes(action) &&
+        !payload
+    ) {
         message.channel.send("A value is required for this action.");
         return "invalid";
     }
 
-    if (["create", "update", "delete", "edit", "del", "make", "claim", "info", "raw"].includes(tag)) {
-        message.channel.send(`\`${tag}\` is a special keyword for this command. It cannot be used.`);
+    if (
+        [
+            "create",
+            "update",
+            "delete",
+            "edit",
+            "del",
+            "make",
+            "claim",
+            "info",
+            "raw",
+        ].includes(tag)
+    ) {
+        message.channel.send(
+            `\`${tag}\` is a special keyword for this command. It cannot be used.`
+        );
         return "invalid";
     }
 
@@ -124,7 +184,10 @@ async function manageTag(message: Message, guildTags: ITags, tag: string, action
         case "delete": {
             const index = guildTags.tags.findIndex((t) => t.name === tag);
 
-            if (guildTags.tags[index].owner !== message.author.id && !message.member?.hasPermission("ADMINISTRATOR")) {
+            if (
+                guildTags.tags[index].owner !== message.author.id &&
+                !message.member?.hasPermission("ADMINISTRATOR")
+            ) {
                 message.channel.send("You do not own this tag.");
                 return "invalid";
             }
@@ -147,8 +210,15 @@ async function manageTag(message: Message, guildTags: ITags, tag: string, action
                     .setTitle(`Info for tag ${tag}`)
                     .setDescription(data.content)
                     .addField("Owner", `<@!${data.owner}> (${data.owner})`)
-                    .addField("Uses", `${data.uses} use${data.uses === 1 ? "" : "s"}`)
-                    .setFooter(`Tag created at ${new Date(data.createdAt).toLocaleDateString()}`)
+                    .addField(
+                        "Uses",
+                        `${data.uses} use${data.uses === 1 ? "" : "s"}`
+                    )
+                    .setFooter(
+                        `Tag created at ${new Date(
+                            data.createdAt
+                        ).toLocaleDateString()}`
+                    )
             );
         }
 
@@ -184,5 +254,7 @@ async function manageTag(message: Message, guildTags: ITags, tag: string, action
 
     await guildTags.save();
 
-    return message.channel.send(`Tag \`${tag}\` ${aliases[action as keyof typeof aliases] ?? action}d.`);
+    return message.channel.send(
+        `Tag \`${tag}\` ${aliases[action as keyof typeof aliases] ?? action}d.`
+    );
 }

@@ -1,6 +1,6 @@
 import { Command } from "@aeroware/aeroclient/dist/types";
 import prettier from "prettier";
-import { getCode, getLang } from "../utils/codeblock";
+import { getCode, getLang } from "../../utils/codeblock";
 
 const parsers = [
     {

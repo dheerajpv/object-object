@@ -1,7 +1,7 @@
 import { Command } from "@aeroware/aeroclient/dist/types";
 import IWillScrambleYourCodeToShit from "javascript-obfuscator";
 import SourceBin from "sourcebin-api";
-import { getCode } from "../utils/codeblock";
+import { getCode } from "../../utils/codeblock";
 
 export default {
     name: "obfuscate",

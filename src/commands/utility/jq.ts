@@ -1,6 +1,6 @@
 import { Command } from "@aeroware/aeroclient/dist/types";
 import * as jq from "node-jq";
-import { getCode } from "../utils/codeblock";
+import { getCode } from "../../utils/codeblock";
 
 export default {
     name: "jq",
