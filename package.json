@@ -13,8 +13,9 @@
     "dependencies": {
         "@aeroware/aeroclient": "^3.6.2",
         "@octokit/core": "^3.4.0",
-        "cheerio": "^1.0.0-rc.6",
+        "cheerio": "^1.0.0-rc.9",
         "common-tags": "^1.8.0",
+        "fuse.js": "^6.4.6",
         "html-entities": "^2.3.2",
         "lodash": "^4.17.21",
         "mongoose": "^5.12.7",
