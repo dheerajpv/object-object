@@ -112,6 +112,8 @@ export default {
             );
             const json = await res.json();
 
+            console.log(json.documents[0].highlight);
+
             return message.channel.send(
                 new MessageEmbed()
                     .setColor("RANDOM")
@@ -119,19 +121,19 @@ export default {
                         decode(
                             utils.trim(
                                 json.documents
-                                    .slice(0, 3)
+                                    .slice(0, 5)
                                     .map(
                                         (doc: any) =>
-                                            `**[${doc.title}](https://developer.mozilla.org/${doc.mdn_url})**\n`.replace(
-                                                /_/g,
-                                                "\\_"
-                                            ) +
-                                            `\`\`\`js\n${doc.highlight.body
-                                                .join(" ")
-                                                .replace(
-                                                    /<\/?mark>/g,
-                                                    ""
-                                                )}\`\`\``
+                                            `**[${
+                                                doc.title
+                                            }](https://developer.mozilla.org/${
+                                                doc.locale
+                                            }/docs/${
+                                                doc.slug
+                                            })**\n${doc.summary.replace(
+                                                /<\/?mark>/g,
+                                                ""
+                                            )}`
                                     )
                                     .join("\n\n"),
                                 2048
