@@ -1,6 +1,7 @@
 import { Command } from "@aeroware/aeroclient/dist/types";
-import SourceBin from "sourcebin-api";
-import { getCode } from "../../utils/codeblock";
+import { create as postBin } from "sourcebin";
+import linguist from "@sourcebin/linguist/dist/linguist.json";
+import { getCode, getLang } from "../../utils/codeblock";
 
 export default {
     name: "bin",
@@ -10,6 +11,7 @@ export default {
     usage: "<code/id>",
     minArgs: 2,
     async callback({ message, args, text }) {
+        const lang = getLang(text) || "plain";
         const code = getCode(text);
 
         if (!code) {
@@ -17,12 +19,31 @@ export default {
             return "invalid";
         }
 
-        //@ts-ignore
-        const res = await SourceBin.postBin({
-            code,
-            title: `Uploaded by ${message.author.tag}`,
-        });
+        const langId =
+            lang === "plain"
+                ? undefined
+                : parseInt(
+                      Object.keys(linguist).find(
+                          (k) =>
+                              // @ts-ignore
+                              linguist[k as keyof typeof linguist].extension ===
+                                  lang ||
+                              linguist[
+                                  k as keyof typeof linguist
+                                  // @ts-ignore
+                              ].aliases?.includes(lang)
+                      )!
+                  ) || undefined;
 
-        return message.channel.send(`Uploaded to ${res}`);
+        //@ts-ignore
+        const { short: url } = await postBin([
+            {
+                name: `Uploaded by ${message.author.tag}`,
+                content: code,
+                language: langId,
+            },
+        ]);
+
+        return message.channel.send(`Uploaded to ${url}`);
     },
 } as Command;

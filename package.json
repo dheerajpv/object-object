@@ -14,6 +14,7 @@
         "@aeroware/aeroclient": "^3.6.2",
         "@mermaid-js/mermaid-cli": "^8.9.3",
         "@octokit/core": "^3.4.0",
+        "@sourcebin/linguist": "^0.0.3",
         "cheerio": "^1.0.0-rc.9",
         "common-tags": "^1.8.0",
         "fuse.js": "^6.4.6",
@@ -25,7 +26,7 @@
         "node-jq": "^1.12.0",
         "prettier": "^2.2.1",
         "puppeteer": "^9.1.1",
-        "sourcebin-api": "^1.0.6"
+        "sourcebin": "^4.2.3"
     },
     "devDependencies": {
         "@types/common-tags": "^1.8.0",

@@ -1,6 +1,6 @@
 import { Command } from "@aeroware/aeroclient/dist/types";
 import IWillScrambleYourCodeToShit from "javascript-obfuscator";
-import SourceBin from "sourcebin-api";
+import { create as postBin } from "sourcebin";
 import { getCode } from "../../utils/codeblock";
 
 export default {
@@ -20,11 +20,14 @@ export default {
         ).getObfuscatedCode();
 
         //@ts-ignore
-        const res = await SourceBin.postBin({
-            code: obfuscated,
-            title: "Obfuscated code",
-        });
+        const { short: url } = await postBin([
+            {
+                content: obfuscated,
+                name: "Obfuscated code",
+                language: "javascript",
+            },
+        ]);
 
-        return message.channel.send(`Obfuscated code: ${res}`);
+        return message.channel.send(`Obfuscated code: ${url}`);
     },
 } as Command;
