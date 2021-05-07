@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@aeroware/aeroclient": "^3.6.2",
+        "@mermaid-js/mermaid-cli": "^8.9.3",
         "@octokit/core": "^3.4.0",
         "cheerio": "^1.0.0-rc.9",
         "common-tags": "^1.8.0",
