@@ -3,11 +3,43 @@ import fetch from "node-fetch";
 const langs = [
     {
         aliases: ["js", "javascript"],
-        compiler: "nodejs-14.0.0",
+        compiler: "nodejs-head",
     },
     {
         aliases: ["ts", "typescript"],
         compiler: "typescript-3.9.5",
+    },
+    {
+        aliases: ["cpp"],
+        compiler: "gcc-head",
+    },
+    {
+        aliases: ["java"],
+        compiler: "openjdk-head",
+    },
+    {
+        aliases: ["c"],
+        compiler: "gcc-head-c",
+    },
+    {
+        aliases: ["py", "python"],
+        compiler: "cpython-head",
+    },
+    {
+        aliases: ["hs", "haskell"],
+        compiler: "ghc-head",
+    },
+    {
+        aliases: ["coffee"],
+        compiler: "coffeescript-head",
+    },
+    {
+        aliases: ["ruby"],
+        compiler: "ruby-head",
+    },
+    {
+        aliases: ["lua"],
+        compiler: "lua-5.4.0",
     },
 ];
 
@@ -40,86 +72,43 @@ export default async function exec(
 
     const { compiler } = langs.find(({ aliases }) => aliases.includes(lang))!;
 
-    const output = await (
-        await fetch("https://wandbox.org/compile", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                compiler,
-                code,
-                codes: [],
-                stdin: "",
-                options: "",
-                "runtime-option-raw": runtimeOptions,
-            }),
-        })
-    ).text();
+    const res = await fetch("https://wandbox.org/api/compile.json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            compiler,
+            code,
+            codes: [],
+            stdin: "",
+            options: "",
+            "runtime-option-raw": runtimeOptions,
+        }),
+    });
+    const output = await res.json();
 
-    const info = {
-        code: 0,
-        output: [] as string[],
-        isOutput: false,
-        isError: false,
+    const info: {
+        code: number;
+        output: string;
+        compiler: string;
+        raw: {
+            compiler_message?: string;
+            compiler_output?: string;
+            program_message?: string;
+            program_output?: string;
+            status?: string;
+        };
+    } = {
+        code: parseInt(output.status),
+        output: output.program_output,
+        raw: output,
+        compiler: output.compiler_output,
     };
 
-    const raw = output.split("\n\n\r").map((l) => l.trim());
-
-    raw.forEach((line) => {
-        const payload = line.split("\r\n").slice(1).join("\r\n");
-
-        if (payload) {
-            payload.split("\n").forEach((load) => {
-                if (info.isError)
-                    return info.output.push(load.slice("data: ".length));
-
-                const stuff = load.slice("data: ".length).split(":");
-
-                const header = stuff[0];
-                const data = stuff.slice(1).join(":");
-
-                if (!data) {
-                    if (info.isOutput) info.output.push(header);
-
-                    return;
-                }
-
-                switch (header) {
-                    case "SyntaxError":
-                    case "TypeError":
-                    case "ReferenceError":
-                    case "RangeError":
-                    case "EvalError":
-                    case "URIError":
-                    case "AggregateError":
-                    case "InternalError":
-                    case "Error": {
-                        info.isError = true;
-                        info.output.push(load.slice("data: ".length));
-                        break;
-                    }
-
-                    case "StdErr":
-                    case "StdOut": {
-                        info.isOutput = true;
-                        info.output.push(data);
-                        break;
-                    }
-
-                    case "ExitCode": {
-                        info.code = parseInt(data);
-                        break;
-                    }
-                }
-
-                return;
-            });
-
-            info.isError = false;
-            info.isOutput = false;
-        }
-    });
+    info.code = parseInt(output.status);
+    info.output = output.program_output;
+    info.compiler = output.compiler_output ?? "";
 
     return info;
 }

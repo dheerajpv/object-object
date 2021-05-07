@@ -6,6 +6,9 @@
     <a href="https://discord.gg/ZU6PZdYcps">
       <img src="https://img.shields.io/discord/839156004712349736?color=%235C6FB1&logo=discord&logoColor=%23fff&style=for-the-badge" alt="Discord" />
     </a>
+    <a href="https://discord.com/api/oauth2/authorize?client_id=839151235860004894&permissions=8&scope=bot%20applications.commands">
+        <img src="https://img.shields.io/badge/invite-the%20bot-5C6FB1?style=for-the-badge&logo=discord&logoColor=white">
+    </a>
     <a href="https://github.com/dheerajpv/object-object">
         <img src="https://img.shields.io/github/license/dheerajpv/object-object?style=for-the-badge" alt="GitHub" />
     </a>
@@ -28,9 +31,12 @@ Nearly all commands are utilities to speed up your development process or to hel
 
 -   Want to Google something but too lazy to open a new tab? We've got a command for that.
 
--   Want to search questions on Stack Overflow? We've got a command for that.
+-   Want to search questions on Stack Overflow? _We've got a command for that._
 
--   Want to stalk people on GitHub by looking at their repositoryies? **We've got a command for that.**
+-   Want to stalk people on GitHub by looking at their repositories? **We've got a command for that.**
+
+-   Want to search for NPM packages quickly?
+    **_We've got a command for that._** ~~you should probably use `npm search` instead~~
 
 Invite the bot [here](https://discord.com/oauth2/authorize?client_id=839151235860004894&scope=bot&permissions=8) to try it out, and see if it makes your life a little easier!
 
@@ -52,4 +58,4 @@ Invite the bot [here](https://discord.com/oauth2/authorize?client_id=83915123586
 | stack     | Fetches Stack Overflow questions.                                |
 | tag       | Manage or retrieve tags to display tidbits of info quickly       |
 
-###### <sup>An entry for the <a href="https://discord.gg/8KbMUMqPuR">Worn Off Keys</a> programming competition of May 2021.</sup>
+<h6 align="center"><sup>An entry for the <a href="https://discord.gg/8KbMUMqPuR">Worn Off Keys</a> programming competition of May 2021.</sup></h6>

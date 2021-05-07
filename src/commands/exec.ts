@@ -1,5 +1,6 @@
 import { utils } from "@aeroware/aeroclient";
 import { Command } from "@aeroware/aeroclient/dist/types";
+import { stripIndent } from "common-tags";
 import { MessageEmbed } from "discord.js";
 import { getCode, getLang } from "../utils/codeblock";
 import exec from "../utils/exec";
@@ -33,19 +34,34 @@ export default {
         try {
             const info = await exec(code, lang);
 
+            let desc = "";
+
+            if (!info.compiler && !info.output) {
+                desc += "There is no output.";
+            }
+
+            if (info.compiler || info.raw.compiler_message) {
+                desc += stripIndent`
+                    Compiler output:
+                    \`\`\`${info.compiler || info.raw.compiler_message}\`\`\`
+                `;
+            }
+
+            if (info.output) {
+                desc += stripIndent`
+                    Program output:
+                    \`\`\`${info.output}\`\`\`
+                `;
+            }
+
             return toEdit.edit(
                 new MessageEmbed()
-                    .setTitle("Code output")
+                    .setTitle("Output")
                     .setAuthor(
                         message.author.tag,
                         message.author.displayAvatarURL()
                     )
-                    .setDescription(
-                        `\`\`\`\n${utils.trim(
-                            info.output.join("\n"),
-                            2000
-                        )}\n\`\`\``
-                    )
+                    .setDescription(utils.trim(desc, 2000))
                     .setFooter(`Program exited with code ${info.code}.`)
             );
         } catch (e) {
