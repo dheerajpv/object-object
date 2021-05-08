@@ -130,7 +130,7 @@ export default {
                     )
                 )
             ).map((config, i) => ({
-                name: configs[i],
+                name: configs[i].slice(0, configs[i].length - 5),
                 config,
             }));
 
