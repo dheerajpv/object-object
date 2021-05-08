@@ -63,14 +63,15 @@ export default {
 
         const pagination = await message.channel.send(page);
 
-        const emojis = ["⭐️", "⏪", "◀️", "⏹", "▶️", "⏩", "🔢"];
+        const emojis = ["⭐", "⏪", "◀️", "⏹", "▶️", "⏩", "🔢"];
 
         if (pagination.deleted) return;
 
         if (pages.length > 1)
             Promise.all(emojis.map((e) => pagination.react(e)));
 
-        pagination.react(emojis[2]);
+        await pagination.react(emojis[0]);
+        await pagination.react(emojis[3]);
 
         const collector = pagination.createReactionCollector(
             (reaction: MessageReaction, user: User) =>
@@ -86,7 +87,7 @@ export default {
             if (pagination.deleted) return;
 
             switch (reaction.emoji.name) {
-                case "⭐️": {
+                case "⭐": {
                     const snippet = await snippets.findById(
                         filtered[pageNumber]
                     );
