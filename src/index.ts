@@ -11,6 +11,7 @@ dotenv();
 
     client.commands.delete("setprefix");
     client.commands.delete("setlocale");
+    client.commands.get("help")!.category = "information";
 
     client
         .use(({ message, command }, next, stop) => {

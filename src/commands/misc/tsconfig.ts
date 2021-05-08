@@ -5,7 +5,7 @@ import { lookup } from "../../events/ready";
 export default {
     name: "tsconfig",
     aliases: ["tsconf"],
-    category: "learning",
+    category: "misc",
     usage: "<preset>",
     description: "Sends a tsconfig.json preset.",
     details: "Supports many many presets for everyone.",

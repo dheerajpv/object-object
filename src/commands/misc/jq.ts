@@ -4,7 +4,7 @@ import { getCode } from "../../utils/codeblock";
 
 export default {
     name: "jq",
-    category: "utility",
+    category: "misc",
     cooldown: 2,
     description: "Manipulates JSON data with `node-jq`.",
     details: "Outputs filtered JSON data.",

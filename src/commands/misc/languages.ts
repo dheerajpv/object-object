@@ -1,7 +1,6 @@
-import { utils } from "@aeroware/aeroclient";
 import { Command } from "@aeroware/aeroclient/dist/types";
 import { stripIndent } from "common-tags";
-import { MessageEmbed, EmojiIdentifierResolvable } from "discord.js";
+import { MessageEmbed } from "discord.js";
 
 const langs = {
     js: {
@@ -76,7 +75,7 @@ const langs = {
 export default {
     name: "languages",
     aliases: ["langs"],
-    category: "learning",
+    category: "misc",
     args: false,
     description: "Shows you information on many leading languages",
     cooldown: 5,

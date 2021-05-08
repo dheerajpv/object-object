@@ -3,7 +3,7 @@ import { Command } from "@aeroware/aeroclient/dist/types";
 export default {
     name: "rnd",
     aliases: ["rng"],
-    category: "dev",
+    category: "misc",
     usage: "[min] [max] [ints]",
     async callback({ message, args }) {
         const [min = 0, max = 255] = args.map(parseFloat);
