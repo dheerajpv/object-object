@@ -15,9 +15,4 @@ export default {
     testServers: process.env.TEST_SERVERS?.replace(/\s+/g, "").split(","),
     logChannel: "839873919993643008",
     disableStaffCooldowns: true,
-    dev: {
-        eval: {
-            console: true,
-        },
-    },
 } as AeroClientOptions;
