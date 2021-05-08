@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "esnext",
         "module": "commonjs",
-        "lib": ["es6", "es2017", "esnext.asynciterable"],
+        "lib": ["esnext", "es2019", "esnext.asynciterable"],
         "outDir": "./dist",
         "moduleResolution": "node",
         "removeComments": true,
