@@ -4,14 +4,15 @@ import fetch from "node-fetch";
 import { get as getBin } from "sourcebin";
 import { getCode } from "../../utils/codeblock";
 
+const srcbinRegex = /https:\/\/(?:sourceb\.in)|(?:srcb\.in)\/(\w+)/;
+
 export default {
     name: "carbon",
     description: "Makes your code look amazing using carbon",
     details: "send code in a codeblock or a sourcebin URL",
+    category: "snippets",
     usage: "<code/sourcebin>",
     async callback({ message, text, args }) {
-        const srcbinRegex = /https:\/\/(?:sourceb\.in)|(?:srcb\.in)\/(\w+)/;
-
         let code: string;
 
         if (srcbinRegex.test(args[0])) {

@@ -19,11 +19,22 @@ export default {
             return "invalid";
         }
 
+        const likes = user.snippets.reduce(
+            (total, snip) => total + snip.likes.length,
+            0
+        );
+
         return message.channel.send(
             new MessageEmbed()
                 .setTitle(`${target.username}'s profile`)
                 .setDescription(user.bio)
                 .setColor(user.color)
+                .addField(
+                    "Snippets",
+                    `${user.snippets.length} snippet${
+                        user.snippets.length === 1 ? "" : "s"
+                    } | ${likes} like${likes === 1 ? "" : "s"}`
+                )
                 .setThumbnail(target.displayAvatarURL())
         );
     },
