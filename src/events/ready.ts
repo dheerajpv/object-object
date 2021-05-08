@@ -1,14 +1,16 @@
 import AeroClient from "@aeroware/aeroclient";
 import { EventHandler } from "@aeroware/aeroclient/dist/types";
 import cheerio from "cheerio";
+import fs from "fs/promises";
 import { decode } from "html-entities";
 import mongoose from "mongoose";
 import fetch from "node-fetch";
-import fs from "fs/promises";
+import path from "path";
 
 export const lookup = {
     html: [] as { tag: string; href: string; text: string }[],
     css: [] as { property: string; href: string }[],
+    configs: [] as { name: string; config: string }[],
 };
 
 export default {
@@ -109,6 +111,30 @@ export default {
             } catch {
                 await fs.mkdir("./tmp");
             }
+
+            const configs = await fs.readdir(
+                path.join(__dirname, "../../assets/configs")
+            );
+
+            lookup.configs = (
+                await Promise.all(
+                    configs.map((config) =>
+                        fs.readFile(
+                            path.join(
+                                __dirname,
+                                "../../assets/configs",
+                                config
+                            ),
+                            "utf8"
+                        )
+                    )
+                )
+            ).map((config, i) => ({
+                name: configs[i],
+                config,
+            }));
+
+            this.logger.success(`Loaded all tsconfigs!`);
         } catch (e) {
             console.error(e);
             process.exit(1);
