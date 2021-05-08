@@ -11,10 +11,6 @@ export interface ISnippet extends Document {
 }
 
 export const snippet = new Schema({
-    _id: {
-        type: String,
-        required: true,
-    },
     author: {
         type: String,
         required: true,

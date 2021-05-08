@@ -13,6 +13,11 @@ export default {
     async callback({ message, args }) {
         const query = args.join(" ").toLowerCase();
 
+        if (query.length < 2) {
+            message.channel.send(`Your query is too short!`);
+            return "invalid";
+        }
+
         const all = await snippets.find();
 
         const filtered = all
@@ -39,6 +44,8 @@ export default {
                 return false;
             })
             .sort((a, b) => b.likes.length - a.likes.length);
+
+        if (!filtered.length) return message.channel.send(`No snippets found.`);
 
         const pages = filtered.map(
             ({ title, language, content, likes, _id }, i) =>
@@ -230,6 +237,6 @@ export default {
         collector.on("collect", handleReaction);
         collector.on("remove", handleReaction);
 
-        collector.on("end", () => pagination.delete());
+        return collector.on("end", () => pagination.delete());
     },
 } as Command;
