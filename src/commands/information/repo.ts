@@ -31,8 +31,6 @@ export default {
                 repo,
             });
 
-            console.log(data);
-
             const embed = new MessageEmbed()
                 .setTitle(`${owner}/${repo}`)
                 .setURL(data.data.html_url)

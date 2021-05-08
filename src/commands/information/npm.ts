@@ -48,7 +48,7 @@ export default {
                         "Links",
                         `[Homepage](${exact.package.links.homepage})\n[Repository](${exact.package.links.repository})`
                     )
-                    .setTimestamp(exact.package.date)
+                    .setTimestamp(new Date(exact.package.date))
                     .setFooter(`v${exact.package.version}`)
             );
         } else {
