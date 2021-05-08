@@ -11,7 +11,7 @@ export default {
     cooldown: 2,
     async callback({ client, message, args }) {
         const target =
-            (await client.users.fetch(args[0])) ??
+            client.users.cache.get(args[0]) ??
             message.mentions.users.first() ??
             message.author;
 
