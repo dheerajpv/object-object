@@ -59,7 +59,12 @@ dotenv();
 
                     collector.on("collect", async (msg) => {
                         if (msg.content.trim().toLowerCase() === "fuck") {
-                            const command = client.commands.get(result.item)!;
+                            const command =
+                                client.commands.get(result.item) ??
+                                client.commands.find(
+                                    ({ aliases }) =>
+                                        !!aliases?.includes(result.item)
+                                )!;
 
                             command.callback({
                                 message,

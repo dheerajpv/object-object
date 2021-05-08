@@ -11,8 +11,11 @@ export interface ITags extends Document {
     }[];
 }
 
-const tag = new Schema({
-    _id: String,
+export const tag = new Schema({
+    _id: {
+        type: String,
+        required: true,
+    },
     tags: {
         type: [
             {
