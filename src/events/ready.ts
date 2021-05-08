@@ -135,6 +135,11 @@ export default {
             }));
 
             this.logger.success(`Loaded all tsconfigs!`);
+
+            this.user?.setActivity({
+                type: "PLAYING",
+                name: "with objects",
+            });
         } catch (e) {
             console.error(e);
             process.exit(1);
