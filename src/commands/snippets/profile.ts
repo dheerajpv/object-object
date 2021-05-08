@@ -24,7 +24,7 @@ export default {
                 .setTitle(`${target.username}'s profile`)
                 .setDescription(user.bio)
                 .setColor(user.color)
-                .setThumbnail(target.avatarURL() ?? target.defaultAvatarURL)
+                .setThumbnail(target.displayAvatarURL())
         );
     },
 } as Command;
