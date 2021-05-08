@@ -45,6 +45,8 @@ dotenv();
                         .split(/\s+/)[0]
                 );
 
+                if (!result) return next();
+
                 const dist = leven(result.item, cmd);
 
                 if (dist < Math.ceil((result.item.length / 3) * 2)) {

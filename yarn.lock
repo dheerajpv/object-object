@@ -771,6 +771,11 @@ camel-case@^3.0.0:
     no-case "^2.2.0"
     upper-case "^1.1.1"
 
+camelcase@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
+  integrity sha1-1UVjW+HjPFQmScaRc+Xeas+uNN0=
+
 camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
@@ -2232,6 +2237,13 @@ inflight@^1.0.4:
   dependencies:
     once "^1.3.0"
     wrappy "1"
+
+infobox-parser@^3.4.1:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/infobox-parser/-/infobox-parser-3.6.0.tgz#693f9ecaef50094090c1a2d1fd65ee6d7832544c"
+  integrity sha512-Owa1Lxq/CdbDEygvTtEqL9sPLom24/pSNTjgRhvsNbXvXPDep1K8FwGNqP3isuewMv3k3/v3eP9d4d7Mg+bJcQ==
+  dependencies:
+    camelcase "^4.1.0"
 
 inherits@2, inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.4"
@@ -4449,6 +4461,14 @@ widest-line@^3.1.0:
   integrity sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
   dependencies:
     string-width "^4.0.0"
+
+wikipedia@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/wikipedia/-/wikipedia-1.1.1.tgz#59018783c4ecb40766fb8ef2c1a6285323c88be1"
+  integrity sha512-P1G+KsRhKVeAV2sXwLP9ZtpEGfcDejAZLazXXc5rptLp8RWYS1K4haW949QX30MtO0KfQSj1BN1WpuDXFjz0uA==
+  dependencies:
+    infobox-parser "^3.4.1"
+    node-fetch "^2.6.1"
 
 word-wrap@~1.2.3:
   version "1.2.3"

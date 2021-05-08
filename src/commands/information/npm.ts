@@ -23,25 +23,40 @@ export default {
             )
         ).json();
 
-        const first = json.results[0];
+        const exact = json.package
+            ? json
+            : json.results.find(
+                  ({ package: { name } }: { package: { name: string } }) =>
+                      name === query
+              );
 
-        if (json.results.length === 1) {
-            const sent = await message.channel.send(
+        if (exact) {
+            return message.channel.send(
                 new MessageEmbed()
-                    .setTitle(first.package.name)
-                    .setURL(first.package.links.npm)
-                    .setDescription(first.package.description)
-                    .setFooter(`v${first.package.version}`)
+                    .setTitle(exact.package.name)
+                    .setURL(exact.package.links.npm)
+                    .setDescription(exact.package.description)
+                    .addField(
+                        "Keywords",
+                        exact.package.keywords
+                            ? exact.package.keywords
+                                  .map((k: string) => `\`${k}\``)
+                                  .join(", ")
+                            : "*No keywords.*"
+                    )
+                    .addField(
+                        "Links",
+                        `[Homepage](${exact.package.links.homepage})\n[Repository](${exact.package.links.repository})`
+                    )
+                    .setTimestamp(exact.package.date)
+                    .setFooter(`v${exact.package.version}`)
             );
-
-            sent.delete({ timeout: 60000 });
-            return;
         } else {
-            utils.paginate(
+            return utils.paginate(
                 message,
                 json.results
                     .reverse()
-                    .slice(-10)
+                    .slice(0, 10)
                     .reverse()
                     .map((r: any) =>
                         new MessageEmbed()
