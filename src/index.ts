@@ -1,8 +1,9 @@
-import AeroClient, { Arguments } from "@aeroware/aeroclient";
+import AeroClient, { Arguments, utils } from "@aeroware/aeroclient";
 import { config as dotenv } from "dotenv";
 import Fuse from "fuse.js";
 import leven from "leven";
 import users from "./models/user";
+import replies from "./replies";
 
 dotenv();
 
@@ -95,11 +96,31 @@ dotenv();
 
             return next();
         })
-        .use(async ({ message }) => {
+        .use(async ({ message }, next) => {
             if (!(await users.findById(message.author.id)))
                 await users.create({
                     _id: message.author.id,
                 });
+
+            return next();
+        })
+        .use(async ({ message }, next, stop) => {
+            if (/<@!?839151235860004894>/.test(message.content)) {
+                const reply =
+                    replies[Math.floor(Math.random() * replies.length)];
+
+                message.channel.startTyping();
+
+                await utils.aDelayOf(reply.length * 10);
+
+                message.channel.stopTyping();
+
+                message.channel.send(reply);
+
+                return stop();
+            }
+
+            return next();
         });
 
     Arguments.use(client);
