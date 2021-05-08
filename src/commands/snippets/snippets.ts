@@ -31,7 +31,7 @@ export default {
                             .setDescription(
                                 `\`\`\`${language}\n${content}\n\`\`\``
                             )
-                            .addField("Likes", likes)
+                            .addField("Likes", likes.length)
                             .addField("Snippet ID", _id)
                             .setFooter(
                                 `Snippet ${i + 1} out of ${
