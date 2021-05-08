@@ -1,6 +1,6 @@
 import { Command } from "@aeroware/aeroclient/dist/types";
 import { stripIndent } from "common-tags";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, MessageReaction, User } from "discord.js";
 
 const langs = {
     js: {
@@ -77,10 +77,10 @@ export default {
     aliases: ["langs"],
     category: "misc",
     args: false,
-    description: "Shows you information on many leading languages",
+    description: "Shows you information on many leading languages.",
     cooldown: 5,
     async callback({ message }) {
-        let mainEmbed = new MessageEmbed()
+        const mainEmbed = new MessageEmbed()
             .setTitle("Languages")
             .setDescription(
                 "This embed will show you information on languages. Click its reaction to learn more."
@@ -103,15 +103,16 @@ export default {
             (k) => langs[k as keyof typeof langs].emoji
         );
 
-        let sentEmbed = await message.channel.send(mainEmbed);
-        emojis.forEach((e) => sentEmbed.react(e));
+        const sentEmbed = await message.channel.send(mainEmbed);
 
-        // FIXME: DOES NOT WORK. NEEDS A FIX @cursorsdottsx
+        emojis.forEach(async (e) => await sentEmbed.react(e));
+
         const reaction = (
             await sentEmbed.awaitReactions(
-                (r, u) =>
-                    emojis.map((e) => e.split(":")[2]).includes(r.emoji.name) &&
-                    u.id === message.author.id,
+                (r: MessageReaction, u: User) =>
+                    emojis
+                        .map((e) => e.split(":")[2].slice(0, -1))
+                        .includes(r.emoji.id!) && u.id === message.author.id,
                 {
                     time: 60000,
                     max: 1,
@@ -119,12 +120,11 @@ export default {
             )
         ).first();
 
-        console.log(reaction);
-
         if (!reaction) return;
 
-        let emoteName = reaction.emoji.name! as keyof typeof langs;
-        let langEmbed = new MessageEmbed()
+        const emoteName = reaction.emoji.name! as keyof typeof langs;
+
+        const langEmbed = new MessageEmbed()
             .setTitle(`Additional ${emoteName} help!`)
             .addField("Additional info", stripIndent`${langs[emoteName].extra}`)
             .addField(
@@ -135,6 +135,7 @@ export default {
             .setTimestamp();
 
         await sentEmbed.reactions.removeAll();
-        sentEmbed.edit(langEmbed);
+
+        return sentEmbed.edit(langEmbed);
     },
 } as Command;
