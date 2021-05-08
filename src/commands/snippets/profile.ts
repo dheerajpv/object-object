@@ -9,8 +9,11 @@ export default {
     description: "",
     details: "",
     cooldown: 2,
-    async callback({ message, args }) {
-        const target = message.mentions.users.first() ?? message.author;
+    async callback({ client, message, args }) {
+        const target =
+            (await client.users.fetch(args[0])) ??
+            message.mentions.users.first() ??
+            message.author;
 
         const user = await users.findById(target.id).populate("snippets");
 
@@ -35,6 +38,7 @@ export default {
                         user.snippets.length === 1 ? "" : "s"
                     } | ${likes} like${likes === 1 ? "" : "s"}`
                 )
+                .addField("Reputation", user.reputation)
                 .setThumbnail(target.displayAvatarURL())
         );
     },

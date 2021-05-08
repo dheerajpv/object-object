@@ -14,4 +14,7 @@ export default [
     "I was watching __anime__ bruh.",
     "Can you like, *not* ping me?",
     "im blocking ur ass",
+    "can you not",
+    "who dafuq pinged me",
+    "no lol dont",
 ];

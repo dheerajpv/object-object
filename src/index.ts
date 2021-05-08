@@ -96,11 +96,44 @@ dotenv();
 
             return next();
         })
-        .use(async ({ message }, next) => {
-            if (!(await users.findById(message.author.id)))
-                await users.create({
+        .use(async ({ message, command }, next) => {
+            const user =
+                (await users.findById(message.author.id)) ??
+                (await users.create({
                     _id: message.author.id,
-                });
+                }));
+
+            if (command) user.reputation += command.cooldown || 1;
+
+            if (
+                ["thx", "thanks", "thnks", "thnk", "ty"].some((word) =>
+                    message.content.toLowerCase().includes(word)
+                ) &&
+                !command
+            ) {
+                if (user.lastThanked + 1000 * 60 * 60 > Date.now())
+                    return next();
+
+                await Promise.allSettled(
+                    message.mentions.users.map(async ({ id }) => {
+                        if (id === message.author.id) return;
+
+                        const u = await users.findById(id);
+
+                        if (!u) return;
+
+                        if (u.wasThanked + 1000 * 60 * 60 <= Date.now()) {
+                            u.reputation += Math.round(Math.random() * 4) + 8;
+                            u.wasThanked = Date.now();
+                            await u.save();
+                        }
+                    })
+                );
+
+                user.lastThanked = Date.now();
+            }
+
+            await user.save();
 
             return next();
         })
@@ -124,4 +157,12 @@ dotenv();
         });
 
     Arguments.use(client);
+
+    setInterval(async () => {
+        (await users.find()).forEach(async (user) => {
+            user.reputation = Math.round(user.reputation * 0.9);
+
+            await user.save();
+        });
+    }, 1000 * 60 * 60 * 24);
 })();

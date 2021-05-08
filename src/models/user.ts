@@ -6,6 +6,9 @@ export interface IUser extends Document {
     color: string;
     bio: string;
     snippets: ISnippet[];
+    reputation: number;
+    lastThanked: number;
+    wasThanked: number;
 }
 
 export const user = new Schema({
@@ -29,6 +32,18 @@ export const user = new Schema({
             },
         ],
         default: [],
+    },
+    reputation: {
+        type: Number,
+        default: 0,
+    },
+    lastThanked: {
+        type: Number,
+        default: 0,
+    },
+    wasThanked: {
+        type: Number,
+        default: 0,
     },
 });
 
